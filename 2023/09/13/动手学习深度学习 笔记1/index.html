@@ -5,7 +5,7 @@
     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     <title>
       
-        开发 | 修尔の小屋
+        动手学习深度学习 笔记1 | 修尔の小屋
       
     </title>
     <meta name="description" content="" />
@@ -58,7 +58,8 @@
           href='/css/layout.css' />
     
     
-  <link rel="stylesheet" type="text/css" href="/css/category.css" />
+  <link rel="stylesheet" type="text/css" href="/css/post.css" />
+  
 
   <meta name="generator" content="Hexo 6.3.0"></head>
   <body>
@@ -84,22 +85,118 @@
     </div>
     <div class="body">
       
-  <div class="wall wall-category--plain">
-    <div class="wall-main">
-      <div class="wall-category-title">
-        <div class="title-icon"
-             style="background-image: url(/images/icon/logo.svg)"></div>
-        开发
+  <article class="post-content">
+    <div class="post-inner">
+      <div class="post-content__head">
+        <div class="post-title">动手学习深度学习 笔记1</div>
+        <div class="post-info">
+          
+  
+
+
+          <span class="post-date">2023-09-13</span>
+        </div>
       </div>
-      <div class="wall-category-description"></div>
-      <div class="wall-category-tags">
-        <div id="tags-outer"><ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a><span class="tag-list-count">1</span></li></ul></div>
+      
+      <div class="post-content__body">
+        
+          <div class="post-gallery">
+            
+          </div>
+        
+        <h1 id="自动微分">自动微分</h1>
+<ul>
+<li>自动微分的作用是自动计算关于某个变量的梯度。例如，这里有一个关于x的函数y，如<span
+class="math display">\[y=2\mathbf{x}^{\top}\mathbf{x}\]</span>,
+然后计算y关于x每个分量的梯度。调用backward()函数可以自动计算y关于x的梯度，打印x.grad即可显示最终结果。</li>
+<li>不过需要注意的是，pytorch会自动累积梯度，因此需要对x.grad调用zero_()来清除之前的值。</li>
+<li>有时候，我们希望将某些计算移到计算图之外，比如<code>y</code>是作为<code>x</code>的函数计算的，而<code>z</code>则是作为<code>y</code>和<code>x</code>的函数计算的。可以对y调用detach()函数来丢弃y的信息。</li>
+<li>使用自动微分的好处之一是，即使计算图需要通过Python控制流，依然可以得到变量的梯度。</li>
+</ul>
+<h1 id="线性回归">线性回归</h1>
+<ul>
+<li><p>回归问题是机器学习领域中的一个基础问题。当我们想预测一个数值时，就会涉及到回归问题。线性假设是指目标可以表示为特征的加权和。</p></li>
+<li><p>观测误差是很难避免的，因此我们加入一个噪声项来考虑观测误差带来的影响。</p></li>
+<li><p>损失函数我们通常选择平方误差<span
+class="math display">\[l^{(i)}(\mathbf{w}, b) = \frac{1}{2}
+\left(\hat{y}^{(i)} - y^{(i)}\right)^2.\]</span></p></li>
+<li><p>训练目标是<span class="math display">\[\mathbf{w}^*, b^* =
+\operatorname*{argmin}_{\mathbf{w}, b}\  L(\mathbf{w},
+b).\]</span></p></li>
+<li><p>线性回归是有解析解的，但是无法广泛应用在深度学习里 ##
+随机梯度下降</p></li>
+<li><p>使用梯度下降，来不断地在损失函数递减的方向上更新参数来降低误差</p></li>
+<li><p>并且小批量随机梯度下降</p></li>
+<li><p>这里涉及到两个超参数：批量大小、学习率lr</p></li>
+</ul>
+<h1 id="softmax回归">Softmax回归</h1>
+<ul>
+<li>用于分类问题</li>
+<li>是一个单层的全连接的神经网络</li>
+<li><span class="math display">\[\hat{\mathbf{y}} =
+\mathrm{softmax}(\mathbf{o})\quad \text{其中}\quad \hat{y}_j =
+\frac{\exp(o_j)}{\sum_k \exp(o_k)}\]</span></li>
+<li>损失函数：交叉熵损失</li>
+</ul>
+<h1 id="多层感知机">多层感知机</h1>
+<ul>
+<li>神经网络不再是单层，在网络层中加入隐藏层</li>
+<li>由于加入激活函数，从线性网络变为非线性网络</li>
+<li><span class="math display">\[\operatorname{ReLU}(x) = \max(x,
+0).\]</span></li>
+<li><span class="math display">\[\operatorname{sigmoid}(x) = \frac{1}{1
++ \exp(-x)}.\]</span></li>
+</ul>
+<h1 id="模型复杂性">模型复杂性</h1>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://zh.d2l.ai/_images/capacity-vs-error.svg">zh.d2l.ai/_images/capacity-vs-error.svg</a></li>
+</ul>
+<h1 id="权重衰退">权重衰退</h1>
+<ul>
+<li>在Loss中加入L2范数，使得学习算法偏向于在大量特征上均匀分布权重的模型，并试图将w的大小缩小到0</li>
+</ul>
+
       </div>
     </div>
-  </div>
-  <div class="post-list">
+  </article>
+  <div class="post__foot">
     
-      DEBUG: 该子页分类下没有文章！在指定文章头部中添加 category: Dev 字段，即可将该文章添加至此页。
+    <div class="post-nav">
+  
+    <a class="post-nav-item-left" href="/2023/09/13/%E8%AE%AD%E7%BB%83%E8%AE%B0%E5%BD%951/">
+      <div class="text-align">
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
+        </svg>
+        <span class="text-small">上一篇</span>
+      </div>
+      <div>训练记录1</div>
+    </a>
+  
+  <div class="vhr"></div>
+  
+    <a class="post-nav-item-right" href="/2023/09/13/%E6%97%A5%E8%AE%B0/">
+      <div class="text-align">
+        <span class="text-small">下一篇</span>
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             transform="scale(-1,-1)"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
+        </svg>
+      </div>
+      开学前小记
+    </a>
+  
+</div>
+
     
     
   </div>
