@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf8" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <title>
+      
+        动手学习深度学习 CH4 Homework | 修尔の小屋
+      
+    </title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    
+      <link rel="apple-touch-icon"
+            sizes="180x180"
+            href="/images/apple-touch-icon.png" />
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/images/favicon-32x32.png" />
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/images/favicon-16x16.png" />
+    
+    
+      <link rel="mask-icon"
+            href="/images/logo.svg"
+            color="" />
+    
+    
+    
+      
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/regular.ttf);
+        font-weight: regular;
+    }
+  </style>
+
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/bold.ttf);
+        font-weight: bold;
+    }
+  </style>
+
+
+    
+    <link rel="stylesheet"
+          type="text/css"
+          href='/css/layout.css' />
+    
+    
+  <link rel="stylesheet" type="text/css" href="/css/post.css" />
+  
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <div class="head">
+      <div class="nav">
+        <a href='/' class="nav-logo">
+          <img alt="logo" height="60px" width="60px" src="/images/logo.svg" />
+        </a>
+        <input id="navBtn" type="checkbox" />
+        <div class="nav-menu">
+          
+            
+              <a class="nav-menu-item" href="/Dev">开发</a>
+            
+              <a class="nav-menu-item" href="/AI">人工智能</a>
+            
+              <a class="nav-menu-item" href="/Life">生活</a>
+            
+          
+        </div>
+        <label class="nav-btn" for="navBtn"></label>
+      </div>
+    </div>
+    <div class="body">
+      
+  <article class="post-content">
+    <div class="post-inner">
+      <div class="post-content__head">
+        <div class="post-title">动手学习深度学习 CH4 Homework</div>
+        <div class="post-info">
+          
+  <a href="/tags/deep-learning/" class="post-tag">#deep learning</a>
+
+
+          <span class="post-date">2023-09-15</span>
+        </div>
+      </div>
+      
+      <div class="post-content__body">
+        
+          <div class="post-gallery">
+            
+          </div>
+        
+        <h1 id="暂退法">4.6 暂退法</h1>
+<h1
+id="如果更改第一层和第二层的暂退法概率会发生什么情况具体地说如果交换这两个层会发生什么情况设计一个实验来回答这些问题定量描述该结果并总结定性的结论">1.如果更改第一层和第二层的暂退法概率，会发生什么情况？具体地说，如果交换这两个层，会发生什么情况？设计一个实验来回答这些问题，定量描述该结果，并总结定性的结论。</h1>
+<p>交换前： <img
+src="https://s2.loli.net/2023/09/14/Y2HmtIyP1nMUfCX.png"
+alt="image.png" /> 交换后： <img
+src="https://s2.loli.net/2023/09/14/nGfzq4EK9jIdMgN.png"
+alt="image.png" /> 初步看来：没有太大的区别，但是如果dropout1 &gt;
+dropout2 的话，似乎test acc与train acc会更接近一些？</p>
+<h2 id="设计实验">设计实验</h2>
+<p>设计三组实验： 一、 dropout1 = 0.1, dropout2 = 0.5 ： <img
+src="https://s2.loli.net/2023/09/14/7Id8ilexj62HwgY.png"
+alt="image.png" /> dropout1 = 0.5, dropout2 = 0.1 ： <img
+src="https://s2.loli.net/2023/09/14/KXhStlV6YA31vCr.png"
+alt="image.png" /> 观察现象：发现dropout1 &gt; dropout2时，test
+acc依旧与 train acc更接近，但是有没有变得更高不好说 二、 dropout1 = 0.2,
+dropout2 = 0.8 ： <img
+src="https://s2.loli.net/2023/09/14/sa9ei6C4DwqBjNb.png"
+alt="image.png" /> dropout1 = 0.8, dropout2 = 0.2 ： <img
+src="https://s2.loli.net/2023/09/14/hm5HgPqriuBVl4p.png"
+alt="image.png" />
+观察现象：本次观测到的现象与前两次尝试相反，推测图二的抖动可能是因为离输入层近dropout值太大引起的</p>
+<p>三、 dropout1 = 0.1, dropout2 = 0.2： <img
+src="https://s2.loli.net/2023/09/14/tbI7qZfKamkFvwe.png"
+alt="image.png" /></p>
+<p>dropout1 = 0.2, dropout2 = 0.1 ： <img
+src="https://s2.loli.net/2023/09/14/UyHWt5m9begNSCO.png"
+alt="image.png" />
+观察现象：依旧符合最初的推测，不过dropout值太小的时候也会造成抖动 ##
+总结： 在合适的范围内，离输入层近的dropout的值偏大一些时，最终test
+acc与train acc的结果会相近一些 #
+2.增加训练轮数，并将使用暂退法和不使用暂退法时获得的结果进行比较。
+增加训练轮数到25 使用dropout： <img
+src="https://s2.loli.net/2023/09/14/LSKVf2QAxeuwJnp.png"
+alt="image.png" /></p>
+<p>不使用dropout： <img
+src="https://s2.loli.net/2023/09/14/pn8sGiPH4EVBu7x.png"
+alt="image.png" /> 比较：发现如果不使用dropout,
+训练过程中会出现非常严重的振荡，而测试集上的表现也相对来说更加不平稳一些，表现更差一些，推测可能是出现了过拟合。
+#
+3.当应用或不应用暂退法时，每个隐藏层中激活值的方差是多少？绘制一个曲线图，以显示这两个模型的每个隐藏层中激活值的方差是如何随时间变化的。
+需要自己写代码 首先研究d2l包里面的train_epoch_ch3函数： 发现trian loss =
+metric[0] / metric[2], train acc = metric[1] / metric[2] train loss
+应该是指nn最后的结果与y的对比得到的loss吧？这似乎并没有深入到每一个隐藏层里面
+就是这个短短的几句代码，其实我并没有真正地理解。</p>
+<p>现在继续深入研究train_epoch_ch3这个函数：
+Accumulator是一个累加器的类，用于累计三个值：trian loss、train
+acc、样本数 在一个epoch的每次iter中，代码会： *
+其实我很疑惑，光用一个step()就行了嘛？？嗯没错，光用一个step就可以更新所有参数。
+*
+至于隐藏层的参数，应该保存在net.parameters()里面(主要是指w等权重，不是激活值)</p>
+<p>主要是需要修改train函数，将返回值改成activations 代码如下：
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">from</span> torch <span class="hljs-keyword">import</span> nn<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">import</span> torchvision<br><span class="hljs-keyword">from</span> torchvision <span class="hljs-keyword">import</span> transforms<br><span class="hljs-keyword">from</span> torch.utils <span class="hljs-keyword">import</span> data<br><br>num_inputs, num_outputs, num_hiddens1, num_hiddens2 = <span class="hljs-number">784</span>, <span class="hljs-number">10</span>, <span class="hljs-number">256</span>, <span class="hljs-number">256</span><br>dropout1, dropout2 = <span class="hljs-number">0.2</span>, <span class="hljs-number">0.5</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">dropout_layer</span>(<span class="hljs-params">X, dropout</span>)<br>    <span class="hljs-keyword">assert</span> <span class="hljs-number">0</span> &lt;= dropout &lt;= <span class="hljs-number">1</span><br>    <span class="hljs-comment"># 在本情况中，所有元素都被丢弃</span><br>    <span class="hljs-keyword">if</span> dropout == <span class="hljs-number">1</span>:<br>        <span class="hljs-keyword">return</span> torch.zeros_like(X)<br>    <span class="hljs-comment"># 在本情况中，所有元素都被保留</span><br>    <span class="hljs-keyword">if</span> dropout == <span class="hljs-number">0</span>:<br>        <span class="hljs-keyword">return</span> X<br>    mask = (torch.rand(X.shape) &gt; dropout).<span class="hljs-built_in">float</span>()<br>    <span class="hljs-keyword">return</span> mask * X / (<span class="hljs-number">1.0</span> - dropout)<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Net</span>(nn.Module):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, num_inputs, num_outputs, num_hiddens1, num_hiddens2, is_training = <span class="hljs-literal">True</span></span>):<br><br>        <span class="hljs-built_in">super</span>(Net, self).__init__()<br>        self.num_inputs = num_inputs<br>        self.training = is_training<br>        self.lin1 = nn.Linear(num_inputs, num_hiddens1)<br>        self.lin2 = nn.Linear(num_hiddens1, num_hiddens2)<br>        self.lin3 = nn.Linear(num_hiddens2, num_outputs)<br>        self.relu = nn.ReLU()<br>        self.activations = []<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">self, X</span>):<br><br>        H1 = self.relu(self.lin1(X.reshape((-<span class="hljs-number">1</span>, self.num_inputs))))<br>        self.activations.append(H1.clone().detach())<br>        <span class="hljs-comment"># 只有在训练模型时才使用dropout</span><br>        <span class="hljs-keyword">if</span> self.training == <span class="hljs-literal">True</span>:<br>            <span class="hljs-comment"># 在第一个全连接层之后添加一个dropout层</span><br>            H1 = dropout_layer(H1, dropout1)<br>        H2 = self.relu(self.lin2(H1))<br>        self.activations.append(H2.clone().detach())<br><br>        <span class="hljs-keyword">if</span> self.training == <span class="hljs-literal">True</span>:<br>            <span class="hljs-comment"># 在第二个全连接层之后添加一个dropout层</span><br>            H2 = dropout_layer(H2, dropout2)<br>        out = self.lin3(H2)<br>        <span class="hljs-keyword">return</span> out<br>        <br>net = Net(num_inputs, num_outputs, num_hiddens1, num_hiddens2)<br><br><span class="hljs-comment"># 但是train的过程就需要自己写了</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">train</span>(<span class="hljs-params">model, train_iter, optimizer, epochs, Loss</span>):<br><br>  activation_variances = []<br>  <span class="hljs-keyword">for</span> epoch <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(epochs):<br>    model.train()<br>    <span class="hljs-keyword">for</span> batch_idx, (data, target) <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(train_iter):<br>      optimizer.zero_grad()<br>      output = model(data)<br>      loss = Loss(output, target)<br>      loss.backward()<br>      optimizer.step()<br>    layer1_activations = torch.cat(model.activations[::<span class="hljs-number">2</span>])<br>    layer2_activations = torch.cat(model.activations[<span class="hljs-number">1</span>::<span class="hljs-number">2</span>])<br>    variance1 = torch.var(layer1_activations, dim=<span class="hljs-number">0</span>).mean().item()<br>    variance2 = torch.var(layer2_activations, dim=<span class="hljs-number">0</span>).mean().item()<br>    activation_variances.append((variance1, variance2))<br><br>  <span class="hljs-keyword">return</span> activation_variances<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_dataloader_workers</span>():<br><br>    <span class="hljs-string">&quot;&quot;&quot;使用4个进程来读取数据</span><br><span class="hljs-string">    Defined in :numref:`sec_fashion_mnist`&quot;&quot;&quot;</span><br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">4</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">load_data_fashion_mnist</span>(<span class="hljs-params">batch_size, resize=<span class="hljs-literal">None</span></span>):<br><br>    <span class="hljs-string">&quot;&quot;&quot;下载Fashion-MNIST数据集，然后将其加载到内存中</span><br><span class="hljs-string">    Defined in :numref:`sec_fashion_mnist`&quot;&quot;&quot;</span><br><br>    trans = [transforms.ToTensor()]<br>    <span class="hljs-keyword">if</span> resize:<br>        trans.insert(<span class="hljs-number">0</span>, transforms.Resize(resize))<br>    trans = transforms.Compose(trans)<br>    mnist_train = torchvision.datasets.FashionMNIST(<br>        root=<span class="hljs-string">&quot;../data&quot;</span>, train=<span class="hljs-literal">True</span>, transform=trans, download=<span class="hljs-literal">True</span>)<br>    mnist_test = torchvision.datasets.FashionMNIST(<br>        root=<span class="hljs-string">&quot;../data&quot;</span>, train=<span class="hljs-literal">False</span>, transform=trans, download=<span class="hljs-literal">True</span>)<br>    <span class="hljs-keyword">return</span> (data.DataLoader(mnist_train, batch_size, shuffle=<span class="hljs-literal">True</span>,<br>                            num_workers=get_dataloader_workers()),<br>            data.DataLoader(mnist_test, batch_size, shuffle=<span class="hljs-literal">False</span>,<br>                            num_workers=get_dataloader_workers()))<br><br>num_epochs, lr, batch_size = <span class="hljs-number">10</span>, <span class="hljs-number">0.1</span>, <span class="hljs-number">256</span><br>loss = nn.CrossEntropyLoss()<br>train_iter, test_iter = load_data_fashion_mnist(batch_size)<br>trainer = torch.optim.SGD(net.parameters(), lr=lr)<br>variances1 = train(net, train_iter, trainer, num_epochs, loss)<br>plt.figure(figsize=(<span class="hljs-number">10</span>, <span class="hljs-number">5</span>))<br>plt.plot(<span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, num_epochs + <span class="hljs-number">1</span>), variances1)<br>plt.xlabel(<span class="hljs-string">&#x27;Epoch&#x27;</span>)<br>plt.ylabel(<span class="hljs-string">&#x27;Activation Variance&#x27;</span>)<br>plt.legend()<br>plt.title(<span class="hljs-string">&#x27;Activation Variance vs. Epoch&#x27;</span>)<br>plt.show()<br><br></code></pre></td></tr></table></figure> 后来直接在colab上面写好了代码 <img
+src="https://s2.loli.net/2023/09/15/3gOk8enM9DiA2qL.png"
+alt="image.png" />
+总结：神经元的激活值方差会降低，神经元之间的激活值会逐渐靠近。</p>
+<h1
+id="为什么在测试时通常不使用暂退法">4.为什么在测试时通常不使用暂退法？</h1>
+<ul>
+<li>不需要。在测试时我们不需要丢弃任何节点。</li>
+</ul>
+<h1
+id="以本节中的模型为例比较使用暂退法和权重衰减的效果如果同时使用暂退法和权重衰减会发生什么情况结果是累加的吗收益是否减少或者说更糟它们互相抵消了吗">5.以本节中的模型为例，比较使用暂退法和权重衰减的效果。如果同时使用暂退法和权重衰减，会发生什么情况？结果是累加的吗？收益是否减少（或者说更糟）？它们互相抵消了吗？</h1>
+<p>使用暂退法： <img
+src="https://s2.loli.net/2023/09/14/nGfzq4EK9jIdMgN.png"
+alt="image.png" /> 使用权重衰减：
+不知道为什么，去掉暂退法，使用权重衰减时，训练结束时的train_loss特别大</p>
+<p>同时使用：训练结束时的train_loss依旧特别大，不知道什么原因。今天比较晚了，明天再探查</p>
+
+      </div>
+    </div>
+  </article>
+  <div class="post__foot">
+    
+    <div class="post-nav">
+  
+    <div class="post-nav-item-left"></div>
+  
+  <div class="vhr"></div>
+  
+    <a class="post-nav-item-right" href="/2023/09/14/%E8%AE%AD%E7%BB%83%E8%AE%B0%E5%BD%951/">
+      <div class="text-align">
+        <span class="text-small">下一篇</span>
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             transform="scale(-1,-1)"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
+        </svg>
+      </div>
+      训练记录1
+    </a>
+  
+</div>
+
+    
+    
+  </div>
+
+    </div>
+    <div class="foot">
+      <div class="foot-inner">
+        <div class="foot__head">
+          
+            <div class="foot-line">
+              <div class="matts">海</div><div class="matts">内</div><div class="matts">存</div><div class="matts">知</div><div class="matts">己</div>
+            </div>
+          
+            <div class="foot-line">
+              <div class="matts">天</div><div class="matts">涯</div><div class="matts">若</div><div class="matts">比</div><div class="matts">邻</div>
+            </div>
+          
+        </div>
+        <div class="foot__body">
+          
+            <div class="foot-item">
+              <div class="foot-item__head">朋友</div>
+              <div class="foot-item__body">
+                
+                  <div class="text">
+                    <img alt="link" height="20px" width="20px" src="/images/icon/icon-link.svg" />
+                    <a class="foot-link" target="_blank" rel="noopener" href="https://github.com/hooozen/hexo-theme-tranquility">Theme Tranquility</a>
+                  </div>
+                
+                <div class="text">
+                  <img alt="link" height="20px" width="20px" src="/images/icon/icon-link+.svg" />
+                  <a class="foot-link"
+                     href="mailto:3200102056@zju.edu.cn?subject=%E7%94%B3%E8%AF%B7%20Hozen.site%20%E7%9A%84%E5%8F%8B%E9%93%BE%E4%BD%8D%E7%BD%AE">
+                  申请友链</a>
+                </div>
+              </div>
+            </div>
+          
+          
+            <div class="foot-item">
+              <div class="foot-item__head">账号</div>
+              <div class="foot-item__body">
+                
+                  <div class="text">
+                    <img alt="link" height="20px" width="20px" src="/images/logo-github.svg" />
+                    <a class="foot-link" target="_blank" rel="noopener" href="https://github.com/xiuer233">github</a>
+                  </div>
+                
+                  <div class="text">
+                    <img alt="link" height="20px" width="20px" src="/images/logo-wx.svg" />
+                    <a class="foot-link" target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI3NzQ4NDkzNg==&mid=2247484469&idx=1&sn=8a442bb67397f52cce5c38c3f9b41e36&chksm=eb64c0d2dc1349c40d2e1bb55615ae28b3f2951be22f00717b9ade98c851082e42dc666ab45d#rd">微信公众号</a>
+                  </div>
+                
+                  <div class="text">
+                    <img alt="link" height="20px" width="20px" src="/images/logo-zh.svg" />
+                    <a class="foot-link" target="_blank" rel="noopener" href="https://www.zhihu.com/people/xiu-er-47-33">知乎</a>
+                  </div>
+                
+              </div>
+            </div>
+          
+          <div class="foot-item">
+            <div class="foot-item__head">联系</div>
+            <div class="foot-item__body">
+              <div class="text">
+                <img alt="link" height="20px" width="20px" src="/images/icon/icon-email.svg" />
+                <a class="foot-link" href="mailto:3200102056@zju.edu.cn">3200102056@zju.edu.cn</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <a href="http://example.com">修尔の小屋</a> &nbsp;|&nbsp;由&nbsp;<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>&nbsp;及&nbsp;
+          <svg width="20" height="20" viewBox="0 0 725 725">
+            <path fill-rule="evenodd" fill="rgb(221, 221, 221)" d="M145.870,236.632 L396.955,103.578 L431.292,419.44 L156.600,522.53 L145.870,236.632 Z" />
+            <path fill-rule="evenodd" fill="rgb(159, 159, 159)" d="M396.955,103.578 L564.345,234.486 L611.558,513.469 L431.292,419.44 L396.955,103.578 Z" />
+            <path fill-rule="evenodd" fill="rgb(0, 0, 0)" d="M431.292,419.44 L611.558,513.469 L358.327,595.18 L156.600,522.53 L431.292,419.44 Z" />
+          </svg>
+          <a target="_blank" rel="noopener" href="https://github.com/hooozen/hexo-theme-tranquility">致远</a>&nbsp;驱动
+        </div>
+      </div>
+    </div>
+    
+      <script src="https://unpkg.com/js-polyfills@0.1.43/es6.js"></script>
+      <script id="MathJax-script"
+              async
+              src="https://www.unpkg.com/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    
+    
+  
+
+  </body>
+</html>
