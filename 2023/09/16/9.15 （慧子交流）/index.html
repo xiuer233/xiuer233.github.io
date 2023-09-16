@@ -5,7 +5,7 @@
     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     <title>
       
-        日记 | 修尔の小屋
+        9.15 （慧子交流） | 修尔の小屋
       
     </title>
     <meta name="description" content="" />
@@ -58,9 +58,8 @@
           href='/css/layout.css' />
     
     
-  <link rel="stylesheet"
-        type="text/css"
-        href="/css/category.css" />
+  <link rel="stylesheet" type="text/css" href="/css/post.css" />
+  
 
   <meta name="generator" content="Hexo 6.3.0"></head>
   <body>
@@ -86,46 +85,99 @@
     </div>
     <div class="body">
       
-  <div class="tag-page-title">#日记</div>
-  <div class="post-list">
+  <article class="post-content">
+    <div class="post-inner">
+      <div class="post-content__head">
+        <div class="post-title">9.15 （慧子交流）</div>
+        <div class="post-info">
+          
+  <a href="/tags/%E6%97%A5%E8%AE%B0/" class="post-tag">#日记</a>
+
+
+          <span class="post-date">2023-09-16</span>
+        </div>
+      </div>
+      
+      <div class="post-content__body">
+        
+          <div class="post-gallery">
+            
+          </div>
+        
+        <p>今天和慧子聊了关于科研的事情（然后我才发现，原来付出了时间之后，我也可以问出一些问题，并且追问下去）
+这是不是从反面说明，很多东西就是因为我没有主动去了解，所以才问不出问题？比如关于申请，我确实脑子里一片混沌。</p>
+<p>交流总结：</p>
+<ul>
+<li>要有工程能力、要跑demo。光学习不足以服人</li>
+<li>系统了解一个细分方向，发现该方向的痛点，然后开始自己构建模型（比如慧子的试衣）</li>
+<li>pytorch的学习还是工程向一些比较好。</li>
+</ul>
+<p>感悟：</p>
+<ul>
+<li>慧子对自己的工作整理的非常清晰，和我讲的时候很有条理</li>
+<li>反观我自己，就没法系统地描述自己这段时间的工作（最多只能说：我最近在学pytorch，但是学了哪些东西呢？说不出来）</li>
+<li>可能用文字写出来，会有帮助吧。</li>
+<li>ps：不知道下次再遇到慧子这样的厉害又热心的人，是什么时候了。</li>
+</ul>
+<p>好的，那就开始练习吧 我的pytorch学了哪些东西呢？：</p>
+<ul>
+<li>了解了自动微分</li>
+<li>了解了张量的广播机制（帮助理解一些pytorch的代码）</li>
+<li>了解了如何从nn.Module继承一个神经网络的类</li>
+<li>了解了线性回归、softmax的机制和实现</li>
+<li>了解了激活函数（防止梯度消失）</li>
+<li>了解了多层感知机</li>
+<li>了解了权重衰减（防止过拟合）、dropout方法（增强模型的稳定性，防止小的扰动造成大的震荡）</li>
+</ul>
+<p>描述一下pytorch的模型搭建过程：</p>
+<ul>
+<li>首先获取数据集，并读取成iter的形式（啊果然还是没理解吧，iter到底是啥啊，分割成一个batch_size的大小吗？）iter一般是x,
+y组合的元组</li>
+<li>然后自己继承一个torch.nn.Module写一个网络，里面定义一下init和forward函数</li>
+<li>然后就可以开始训练了。具体来说是写一个for循环，遍历num_epochs次</li>
+<li>对于训练函数来说，需要定义损失函数Loss，分类问题一般使用交叉熵损失</li>
+<li>然后还需要定义optimizer？一般会选随机梯度下降的方法(SGD)</li>
+<li>在每一轮循环里面，都要（完了，这部分不理解，知识盲区）
+<ul>
+<li>首先计算y</li>
+<li>然后计算loss</li>
+<li>清除上一个epoch的grad, 好像是要调用一个zero_grad()的函数</li>
+<li>然后调用backward(), 反向一下</li>
+<li>然后对==优化器==调用step(), 前进一下</li>
+</ul></li>
+<li>循环完之后，每个epoch都evaluate一下acc</li>
+</ul>
+<p>今天主要是写d2l后面的作业，主要是输出。明天学一下慧子推荐的pytorch教程。</p>
+
+      </div>
+    </div>
+  </article>
+  <div class="post__foot">
     
+    <div class="post-nav">
   
-  <div class="post-card">
-    <div class="post__head">
-      <a href="/2023/09/16/9.15%20%EF%BC%88%E6%85%A7%E5%AD%90%E4%BA%A4%E6%B5%81%EF%BC%89/" class="post-title hover-line">9.15 （慧子交流）</a>
-      
-    </div>
-    <div class="post__body">
-      
-      <div class="post-excerpt"></div>
-    </div>
-    <div class="post__foot">
-      <div class="post-tags">
-  <a href="/tags/%E6%97%A5%E8%AE%B0/" class="post-tag">#日记</a>
-
-</div>
-    </div>
-  </div>
-
+    <div class="post-nav-item-left"></div>
   
-  <div class="post-card">
-    <div class="post__head">
-      <a href="/2023/09/13/%E6%97%A5%E8%AE%B0/" class="post-title hover-line">开学前小记</a>
-      
-    </div>
-    <div class="post__body">
-      
-      <div class="post-excerpt"></div>
-    </div>
-    <div class="post__foot">
-      <div class="post-tags">
-  <a href="/tags/%E6%97%A5%E8%AE%B0/" class="post-tag">#日记</a>
-
+  <div class="vhr"></div>
+  
+    <a class="post-nav-item-right" href="/2023/09/15/%E5%8A%A8%E6%89%8B%E5%AD%A6%E4%B9%A0%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%20CH4%20Homework/">
+      <div class="text-align">
+        <span class="text-small">下一篇</span>
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             transform="scale(-1,-1)"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596"/>
+        </svg>
+      </div>
+      动手学习深度学习 CH4 Homework
+    </a>
+  
 </div>
-    </div>
-  </div>
 
-
+    
     
   </div>
 
@@ -214,6 +266,7 @@
               src="https://www.unpkg.com/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
     
     
-    
+  
+
   </body>
 </html>
